@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbut</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        button { padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Barbut Dice Game</h1>
+    <button onclick="rollDice()">Roll Dice</button>
+    <p>Dice 1: <span id="dice1">0</span></p>
+    <p>Dice 2: <span id="dice2">0</span></p>
+    <p id="result"></p>
+    <script>
+        function rollDice() {
+            const dice1 = Math.floor(Math.random() * 6) + 1;
+            const dice2 = Math.floor(Math.random() * 6) + 1;
+            document.getElementById("dice1").textContent = dice1;
+            document.getElementById("dice2").textContent = dice2;
+
+            if (dice1 === dice2) {
+                document.getElementById("result").textContent = "You rolled a double! You win!";
+            } else {
+                document.getElementById("result").textContent = "No match, try again!";
+            }
+        }
+    </script>
+</body>
+</html>
