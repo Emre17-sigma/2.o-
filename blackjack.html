@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        button { margin: 10px; padding: 10px 20px; }
+    </style>
+</head>
+<body>
+    <h1>Blackjack Game</h1>
+    <div>
+        <p>Player Score: <span id="player-score">0</span></p>
+        <p>Dealer Score: <span id="dealer-score">0</span></p>
+        <button onclick="deal()">Deal</button>
+        <button onclick="hit()">Hit</button>
+        <button onclick="stand()">Stand</button>
+        <p id="message"></p>
+    </div>
+    <script>
+        let playerScore = 0;
+        let dealerScore = 0;
+        let isPlayerTurn = true;
+
+        function getRandomCard() {
+            return Math.floor(Math.random() * 10) + 1; // Cards are between 1 and 10
+        }
+
+        function deal() {
+            playerScore = getRandomCard() + getRandomCard();
+            dealerScore = getRandomCard() + getRandomCard();
+            document.getElementById("player-score").textContent = playerScore;
+            document.getElementById("dealer-score").textContent = dealerScore;
+            document.getElementById("message").textContent = "Choose 'Hit' or 'Stand'.";
+            isPlayerTurn = true;
+        }
+
+        function hit() {
+            if (isPlayerTurn) {
+                playerScore += getRandomCard();
+                document.getElementById("player-score").textContent = playerScore;
+                if (playerScore > 21) {
+                    document.getElementById("message").textContent = "Bust! You lose.";
+                    isPlayerTurn = false;
+                }
+            }
+        }
+
+        function stand() {
+            isPlayerTurn = false;
+            while (dealerScore < 17) {
+                dealerScore += getRandomCard();
+            }
+            document.getElementById("dealer-score").textContent = dealerScore;
+            if (dealerScore > 21 || playerScore > dealerScore) {
+                document.getElementById("message").textContent = "You win!";
+            } else if (playerScore === dealerScore) {
+                document.getElementById("message").textContent = "It's a tie!";
+            } else {
+                document.getElementById("message").textContent = "Dealer wins!";
+            }
+        }
+    </script>
+</body>
+</html>
